@@ -8,10 +8,13 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1>Image Scanner</h1>
-  <input type="text" id="urlInput">
-  <button id="scanButton">Scan</button>
-  <div id="imageList"></div>
+  <h1>Image Scraper</h1>
+  <form>
+    <label for="url">Enter a URL:</label>
+    <input type="text" id="url" name="url">
+    <button type="button" id="submit">Submit</button>
+  </form>
+  <div id="output"></div>
+  <script src="app.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
