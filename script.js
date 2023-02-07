@@ -1,27 +1,27 @@
-const inputLink = document.querySelector("#input-link");
-const scanButton = document.querySelector("#scan-button");
-const output = document.querySelector("#output");
+const urlInput = document.getElementById("urlInput");
+const scanButton = document.getElementById("scanButton");
+const imageList = document.getElementById("imageList");
 
-scanButton.addEventListener("click", async () => {
-  const link = inputLink.value;
-  const response = await fetch(link);
-  const html = await response.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const images = doc.querySelectorAll("img");
-  let links = [];
-  images.forEach(img => {
-    const src = img.getAttribute("src");
-    if (
-      src.endsWith(".jpg") ||
-      src.endsWith(".jpeg") ||
-      src.endsWith(".png") ||
-      src.endsWith(".webp") ||
-      src.endsWith(".svg") ||
-      src.endsWith(".gif")
-    ) {
-      links.push(src);
-    }
-  });
-  output.innerHTML = links.map(link => `<p>${link}</p>`).join("");
+scanButton.addEventListener("click", () => {
+  const url = urlInput.value;
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      const parser = new DOMParser();
+      const html = parser.parseFromString(data, "text/html");
+      const images = html.getElementsByTagName("img");
+      for (let i = 0; i < images.length; i++) {
+        const image = images[i];
+        const imageSrc = image.getAttribute("src");
+        if (imageSrc) {
+          const imageLink = document.createElement("a");
+          imageLink.setAttribute("href", imageSrc);
+          imageLink.innerText = imageSrc;
+          imageList.appendChild(imageLink);
+        }
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 });
