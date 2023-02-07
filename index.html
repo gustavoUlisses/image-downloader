@@ -28,7 +28,7 @@
       const output = document.getElementById("output");
 
       analyzeButton.addEventListener("click", () => {
-        fetch(`https://cors-anywhere.herokuapp.com/${inputLink.value}`)
+        fetch(`https://proxyphp.com/?q=${inputLink.value}`)
           .then(response => response.text())
           .then(data => {
             const parser = new DOMParser();
