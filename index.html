@@ -1,46 +1,17 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      #container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 50px;
-      }
-
-      #output {
-        margin-top: 20px;
-        width: 50%;
-        text-align: left;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="container">
-      <input type="text" id="inputLink" placeholder="Inserir link aqui">
-      <button id="analyzeButton">Analisar</button>
-      <div id="output"></div>
-    </div>
-    <script>
-      const analyzeButton = document.getElementById("analyzeButton");
-      const inputLink = document.getElementById("inputLink");
-      const output = document.getElementById("output");
-
-      analyzeButton.addEventListener("click", () => {
-        fetch(`https://proxyphp.com/?q=${inputLink.value}`)
-          .then(response => response.text())
-          .then(data => {
-            const parser = new DOMParser();
-            const html = parser.parseFromString(data, "text/html");
-            const images = html.querySelectorAll("img");
-            let imageLinks = "";
-            images.forEach(img => {
-              imageLinks += `<p>${img.src}</p>`;
-            });
-            output.innerHTML = imageLinks;
-          });
-      });
-    </script>
-  </body>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>img/downloader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>img/downloader</h1>
+  <input type="text" id="input-link">
+  <button id="scan-button">Scan</button>
+  <div id="output"></div>
+  <script src="script.js"></script>
+</body>
 </html>
